@@ -1,0 +1,17 @@
+﻿/*
+*这个头文件很简单，其实是根据是否定义了TROLL_LIBRARY宏来将TROLLSHARED_EXPORT重新定义。
+*TROLL_LIBRARY这个宏就是我们在 pro 的 DEFINES 中定义的。如果TROLL_LIBRARY已经定义，则TROLL_EXPORT定义为Q_DECL_EXPORT，否则的话则是Q_DECL_IMPORT。
+*由于我们在 Troll 插件的 pro 中定义了TROLL_LIBRARY宏，那么TROLLSHARED_EXPORT会被展开为Q_DECL_EXPORT。
+*/
+#ifndef TROLLPLUGIN_GLOBAL_H
+#define TROLLPLUGIN_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(TROLLPLUGIN_LIBRARY)
+#  define TROLLPLUGIN_EXPORT Q_DECL_EXPORT
+#else
+#  define TROLLPLUGIN_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // TROLLPLUGIN_GLOBAL_H
